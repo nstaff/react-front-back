@@ -1,40 +1,62 @@
-import React from 'react';
+import React, { Component } from 'react';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
-import { Button, Columns } from 'react-bulma-components';
+import { Button, Columns, Navbar } from 'react-bulma-components';
+import '../node_modules/font-awesome/css/font-awesome.min.css';
 
-function App() {
-  return (
-    <div className="App">
-      <Button color="primary" renderAs="a">
-        My Bulma button
-      </Button>
-      <header className="App-header"></header>
-      <Columns>
-        <Columns.Column size="one-fifth">20%</Columns.Column>
-        <Columns.Column>80%</Columns.Column>
-      </Columns>
-      <Columns>
-        <Columns.Column size="one-quarter">25%</Columns.Column>
-        <Columns.Column>75%</Columns.Column>
-      </Columns>
-      <Columns>
-        <Columns.Column size="one-third">33.333333333%</Columns.Column>
-        <Columns.Column>66.666666667%</Columns.Column>
-      </Columns>
-      <Columns>
-        <Columns.Column size="half">50%</Columns.Column>
-        <Columns.Column>Also 50%</Columns.Column>
-      </Columns>
-      <Columns>
-        <Columns.Column size="two-thirds">66.666666667%</Columns.Column>
-        <Columns.Column>33.333333333%</Columns.Column>
-      </Columns>
-      <Columns>
-        <Columns.Column size="three-quarters">75%</Columns.Column>
-        <Columns.Column>25%</Columns.Column>
-      </Columns>
-    </div>
-  );
+const menuItems = [
+  {
+    name: 'Home',
+    url: '/',
+    iconClass: ''
+  },
+  {
+    name: 'Google',
+    url: 'https://www.google.com',
+    iconClass: 'fa fa-spinner fa-spin'
+  },
+  {
+    name: 'Github',
+    url: 'https://www.github.com/nstaff',
+    iconClass: 'fab fa-github'
+  }
+];
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      menuItems
+    };
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <Navbar color="light" fixed="top" active={true} transparent={false}>
+          <Navbar.Brand>
+            <Navbar.Item renderAs="a" href="#">
+              <img
+                src="https://bulma.io/images/bulma-logo.png"
+                alt="Bulma: a modern CSS framework based on Flexbox"
+                width="112"
+                height="28"
+              />
+            </Navbar.Item>
+            <Navbar.Burger />
+          </Navbar.Brand>
+          <Navbar.Menu>
+            <Navbar.Container>
+              {this.state.menuItems.map(item => (
+                <Navbar.Item href={item.url}>
+                  <i className={item.className}>{item.name}</i>
+                </Navbar.Item>
+              ))}
+            </Navbar.Container>
+          </Navbar.Menu>
+        </Navbar>
+      </div>
+    );
+  }
 }
 
 export default App;
